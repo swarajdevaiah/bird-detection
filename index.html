@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom in Picture using Hand Gestures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header, .title, .project-title, .names, .supervisor {
+            text-align: center;
+            margin: 20px 0;
+        }
+        header h1 {
+            margin: 0;
+            padding: 20px;
+            background-color: #0066cc;
+            color: #fff;
+        }
+        p, .names, .supervisor {
+            margin: 10px 0;
+        }
+        .names, .supervisor {
+            font-weight: bold;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1, .title, .project-title {
+            color: #0066cc;
+        }
+        form {
+            margin-top: 20px;
+            text-align: center;
+        }
+        label, select, input, button {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004c99;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SJB INSTITUTE OF TECHNOLOGY</h1>
+        <p>No.67, BGS Health & Education City, Dr.Vishnuvardhan Rd, Kengeri, Bengaluru, Karnataka 560060</p>
+        <p>An Autonomous Institute under VTU</p>
+        <p>Approved by AICTE - New Delhi, Accredited by NAAC A+, Accredited by NBA</p>
+    </header>
+
+    <div class="container">
+        <div class="title">A Mini Project On</div>
+        <div class="project-title">“Bird Detection Using OpenCV”</div>
+
+        <div class="names">
+            By<br>
+            Swaraj Bharath P [1JB21CS157]<br>
+            Tejas N [1JB21CS160]
+        </div>
+
+        <div class="supervisor">
+            Under the Guidance of<br>
+            Dr. Bindiya M K and Mrs.Roopa M K<br>
+            Professor,Associate Prof<br>
+            Dept.of CSE, SJBIT
+        </div>
+
+        <h1>Run YOLO Detection</h1>
+        <form id="run-script-form">
+            <label for="source_type">Source Type:</label>
+            <select id="source_type" name="source_type">
+                <option value="file">File</option>
+                <option value="webcam">Webcam</option>
+            </select><br>
+            <label for="source_path">Source Path (if file):</label>
+            <input type="text" id="source_path" name="source_path"><br>
+            <button type="submit">Run Script</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('run-script-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/run-script', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        });
+    </script>
+</body>
+</html>
